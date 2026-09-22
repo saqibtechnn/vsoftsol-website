@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vision Software Solutions — Windows tools for network &amp; security teams</title>
+<meta name="description" content="Vision Software Solutions builds on-premises Windows tools for network and security teams: vSoft-Network-Backup for Cisco config backup, and VSoftSol Syslog Manager for syslog collection, alerting, and reporting.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M6 6 L20 32 L34 6' fill='none' stroke='%231a56db' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --text: #0f172a;
+    --text-2: #475569;
+    --text-3: #64748b;
+    --blue: #1a56db;
+    --blue-dark: #1743ad;
+    --syslog: #0f4c81;
+    --syslog-dark: #0c3d68;
+    --syslog-accent: #2e9e6b;
+    --radius: 14px;
+    --shadow: 0 1px 3px rgba(15,23,42,.06), 0 8px 24px rgba(15,23,42,.06);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  img { max-width: 100%; display: block; }
+
+  /* Nav */
+  header.site-nav {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(248,250,252,.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .site-nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; color: var(--text); white-space: nowrap; }
+  .brand svg { height: 26px; width: 26px; }
+  .brand span { font-size: 15px; }
+  .wordmark {
+    font-weight: 800; letter-spacing: -.02em;
+    background: linear-gradient(90deg, var(--blue), var(--syslog-accent));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  nav.links { display: flex; align-items: center; gap: 4px; }
+  nav.links a {
+    text-decoration: none; color: var(--text-2); font-weight: 600; font-size: 14.7px;
+    padding: 8px 12px; border-radius: 8px;
+  }
+  nav.links a:hover { background: rgba(15,23,42,.05); color: var(--text); }
+  .nav-cta { display: flex; gap: 8px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border-radius: 10px; font-weight: 700; text-decoration: none; cursor: pointer;
+    padding: 13px 24px; font-size: 15px; border: 1px solid transparent; white-space: nowrap;
+  }
+  .btn-sm { padding: 9px 16px; font-size: 14px; border-radius: 8px; }
+  .btn-blue { background: var(--blue); color: #fff; }
+  .btn-blue:hover { background: var(--blue-dark); }
+  .btn-syslog { background: var(--syslog); color: #fff; }
+  .btn-syslog:hover { background: var(--syslog-dark); }
+  .btn-ghost { background: #fff; color: var(--text); border-color: var(--border); }
+  .btn-ghost:hover { background: #f1f5f9; }
+
+  /* Company hero */
+  .company-hero { padding: 72px 0 48px; text-align: center; }
+  .company-hero .kicker { font-weight: 700; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); margin-bottom: 14px; }
+  .company-hero h1 { font-size: 38px; line-height: 1.15; margin: 0 0 16px; font-weight: 800; letter-spacing: -.01em; }
+  .company-hero p.lead { max-width: 680px; margin: 0 auto; color: var(--text-2); font-size: 17.5px; }
+
+  .product-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 40px 0 8px; }
+  @media (max-width: 720px) { .product-picker { grid-template-columns: 1fr; } }
+  .pick-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 28px; text-align: left; box-shadow: var(--shadow); text-decoration: none; color: var(--text);
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .pick-card:hover { border-color: var(--text-3); }
+  .pick-card .pick-badge { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+  .pick-card.pb-blue .pick-badge { color: var(--blue); }
+  .pick-card.pb-syslog .pick-badge { color: var(--syslog); }
+  .pick-card h3 { margin: 0; font-size: 21px; }
+  .pick-card p { margin: 0; color: var(--text-2); font-size: 15px; }
+  .pick-card .go { font-weight: 700; font-size: 14.5px; margin-top: 4px; }
+  .pick-card.pb-blue .go { color: var(--blue); }
+  .pick-card.pb-syslog .go { color: var(--syslog); }
+
+  /* Product sections */
+  section.product { padding: 88px 0; border-top: 1px solid var(--border); }
+  section.product:nth-of-type(odd) { background: #ffffff; }
+  .product-header { text-align: center; max-width: 720px; margin: 0 auto 40px; }
+  .product-logo { height: 44px; width: 44px; margin: 0 auto 20px; display: block; }
+  .product-header h2 { font-size: 30px; margin: 0 0 14px; font-weight: 800; letter-spacing: -.01em; }
+  .product-header p.tagline { color: var(--text-2); font-size: 16.5px; margin: 0 0 28px; }
+  .cta-row { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .version-line { text-align: center; color: var(--text-3); font-size: 13.5px; margin-top: 14px; }
+
+  .about-copy { max-width: 760px; margin: 56px auto 0; color: var(--text-2); font-size: 16px; }
+  .about-copy p { margin: 0 0 16px; }
+
+  .section-title { text-align: center; font-size: 24px; font-weight: 800; margin: 64px 0 32px; letter-spacing: -.01em; }
+
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .feature-grid { grid-template-columns: 1fr; } }
+  .feature-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 24px; box-shadow: var(--shadow);
+  }
+  .feature-card h3 { margin: 0 0 8px; font-size: 16.5px; }
+  .feature-card p { margin: 0; color: var(--text-2); font-size: 14.5px; }
+
+  footer.site-footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--text-3); font-size: 14px; }
+  footer.site-footer .support { margin-bottom: 14px; color: var(--text-2); font-size: 15px; }
+  footer.site-footer a.kofi { color: #ff5e5b; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 6 L20 32 L34 6" fill="none" stroke="url(#navGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="navGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1a56db"/><stop offset="1" stop-color="#2e9e6b"/></linearGradient></defs></svg>
+      <span>Vision Software Solutions</span>
+    </a>
+    <nav class="links">
+      <a href="#top">Home</a>
+      <a href="#network-backup">Network Backup</a>
+      <a href="#syslog-manager">Syslog Manager</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="#network-backup">vSoft-Network-Backup</a>
+      <a class="btn btn-syslog btn-sm" href="#syslog-manager">Syslog Manager</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="company-hero">
+    <div class="wrap">
+      <div class="kicker">Vision Software Solutions</div>
+      <h1>Windows tools built for teams who run their own network</h1>
+      <p class="lead">On-premises software for network and security teams — no cloud account required, no data leaving your network unless you decide it should. Pick a product below.</p>
+
+      <div class="product-picker">
+        <a class="pick-card pb-blue" href="#network-backup">
+          <div class="pick-badge">Network configuration</div>
+          <h3>vSoft-Network-Backup</h3>
+          <p>Reliable backup and recovery for Cisco routers and switches, with a built-in SFTP server and one-click full system restore.</p>
+          <div class="go">See vSoft-Network-Backup →</div>
+        </a>
+        <a class="pick-card pb-syslog" href="#syslog-manager">
+          <div class="pick-badge">Syslog · SIEM-lite</div>
+          <h3>VSoftSol Syslog Manager</h3>
+          <p>On-premises syslog collection, parsing, alerting, dashboards, and reporting for every device on your network — one Windows Service, one install.</p>
+          <div class="go">See Syslog Manager →</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== vSoft-Network-Backup ===================== -->
+  <section class="product" id="network-backup">
+    <div class="wrap">
+      <div class="product-header">
+        <svg class="product-logo" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 6 L20 32 L34 6" fill="none" stroke="var(--blue)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h2>vSoft-Network-Backup</h2>
+        <p class="tagline">A reliable network configuration backup and recovery solution for Cisco routers and switches.</p>
+        <div class="cta-row">
+          <a class="btn btn-blue" href="https://github.com/saqibtechnn/vSoft-Baclup-Updates/releases/latest/download/CiscoConfigBackup-Beta-Setup.exe">⬇ Download for Windows</a>
+          <a class="btn btn-ghost" href="#nb-features">See features</a>
+        </div>
+        <div class="version-line">v2.9.6 Build 012 (Beta) · 25.4 MB · Windows 10 / 11 (64-bit)</div>
+      </div>
+
+      <div class="about-copy">
+        <p>vSoft-Network-Backup is a reliable network configuration backup and recovery solution designed for Cisco routers and switches. It automatically collects, stores, and organizes device configurations, helping network teams protect critical settings, reduce manual effort, and recover quickly from configuration loss or device replacement.</p>
+        <p>With built-in SFTP server capability, vSoft-Network-Backup also provides a secure central location for transferring and managing backup files. Whether you manage a small office network or a large multi-site environment, it helps keep network configurations protected, accessible, and ready when needed.</p>
+        <p>Beyond individual device backups, a one-click Full System Backup can snapshot the entire install — devices, credentials, schedules, and settings — so the tool itself can be restored in minutes if something ever goes wrong on the server it runs on.</p>
+      </div>
+
+      <h3 class="section-title" id="nb-features">Everything you need to protect your network configs</h3>
+      <div class="feature-grid">
+        <div class="feature-card"><h3>Scheduled config backups</h3><p>Set daily, weekly, or custom schedules per device and let vSoft-Network-Backup pull configs automatically — no manual exports.</p></div>
+        <div class="feature-card"><h3>Full System Backup &amp; Restore</h3><p>One-click, same-machine disaster-recovery snapshot of the whole install — devices, credentials, schedules, and settings — restorable in a few clicks if something goes wrong.</p></div>
+        <div class="feature-card"><h3>Built-in SFTP server</h3><p>A secure, central location for devices or scripts to push backup files to, alongside the standard SSH pull workflow.</p></div>
+        <div class="feature-card"><h3>Encrypted credential vault</h3><p>Device credentials are protected with Windows DPAPI, never stored in plain text and never shown back in the UI.</p></div>
+        <div class="feature-card"><h3>Local HTTPS dashboard</h3><p>Manage devices, schedules, and backup history from a self-hosted web UI that only your network can reach.</p></div>
+        <div class="feature-card"><h3>MFA, RADIUS &amp; TACACS+</h3><p>Admin login supports TOTP-based multi-factor authentication, and can defer to your existing RADIUS or TACACS+ infrastructure.</p></div>
+        <div class="feature-card"><h3>SIEM export</h3><p>Forward security-relevant audit events to your syslog/CEF-speaking SIEM — nothing extra to configure beyond a destination.</p></div>
+        <div class="feature-card"><h3>SSH host-key verification</h3><p>New devices require explicit host-key approval, protecting you from silent man-in-the-middle swaps.</p></div>
+        <div class="feature-card"><h3>Runs as a Windows Service</h3><p>Installs once and keeps running in the background — through reboots, logons, and logoffs.</p></div>
+        <div class="feature-card"><h3>Version history &amp; diff view</h3><p>Every backup is kept and diffable against the previous run, so config drift is easy to spot.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VSoftSol Syslog Manager ===================== -->
+  <section class="product" id="syslog-manager">
+    <div class="wrap">
+      <div class="product-header">
+        <svg class="product-logo" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 6 L20 32 L34 6" fill="none" stroke="var(--syslog)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h2>VSoftSol Syslog Manager</h2>
+        <p class="tagline">On-premises syslog collection, parsing, alerting, dashboards, and reporting — one Windows Service, no external runtime dependencies.</p>
+        <div class="cta-row">
+          <a class="btn btn-syslog" href="https://github.com/saqibtechnn/vsoftsol-syslog-manager/releases/latest/download/VSoftSolSyslogManagerSetup-1.1.1.msi">⬇ Download for Windows</a>
+          <a class="btn btn-ghost" href="#sm-features">See features</a>
+        </div>
+        <div class="version-line">v1.1.1 · 11.8 MB · Windows 10 / 11 (64-bit) · Run installer as Administrator</div>
+      </div>
+
+      <div class="about-copy">
+        <p>VSoftSol Syslog Manager collects UDP, TCP, TLS, SNMP trap, and Windows Event Log traffic from every device on your network, parses it with 17 built-in vendor packs — Cisco, Juniper, Fortinet, pfSense/OPNsense, Aruba, and more — or your own custom extractors, and keeps every message exactly as it arrived, whether it parsed cleanly or not. Search it, route it into rules and alerts, put it on live dashboards, and schedule PDF/CSV reports — all from one self-hosted HTTPS web console.</p>
+        <p>Access control is built in from day one: four roles (Administrator, Operator, Read-Only, Auditor), per-user stream and device scoping, optional TOTP multi-factor on every admin login, and a tamper-evident, hash-chained audit log covering every sign-in, config change, and export.</p>
+        <p>Nothing about it needs the internet to run — it installs as a single Windows Service bound to your own network. The one exception is entirely opt-in: an off-by-default update checker that only ever downloads a release once its cryptographic signature has verified.</p>
+      </div>
+
+      <h3 class="section-title" id="sm-features">Everything you need to collect, watch, and report on your logs</h3>
+      <div class="feature-grid">
+        <div class="feature-card"><h3>Universal syslog collection</h3><p>UDP, TCP, and TLS syslog listeners, plus SNMP trap and Windows Event Log intake — every message stored byte-for-byte, even from vendors with no built-in parser.</p></div>
+        <div class="feature-card"><h3>17 vendor parser packs, plus your own</h3><p>Cisco, Juniper, Fortinet, pfSense/OPNsense, Aruba, and more ship parsed out of the box; the built-in Pattern Tester lets you build and save GROK/regex extractors for anything else against a real sample message.</p></div>
+        <div class="feature-card"><h3>Rules, alerts &amp; live dashboards</h3><p>Route messages into streams, fire actions — email, webhook, syslog forward, script, ODBC — on match, and get notified the moment a threshold breaches.</p></div>
+        <div class="feature-card"><h3>Scheduled PDF/CSV reports</h3><p>Build a report once, schedule it daily, weekly, or monthly, and have it emailed automatically — including compliance-ready canned templates.</p></div>
+        <div class="feature-card"><h3>Hot / warm / cold retention</h3><p>Configurable tiering with compressed, integrity-verified cold archives and one-click restore, so you keep years of history without keeping years of disk.</p></div>
+        <div class="feature-card"><h3>Role-based access + TOTP MFA</h3><p>Four built-in roles with per-user stream and device-group scoping, and optional TOTP two-factor on every admin login.</p></div>
+        <div class="feature-card"><h3>Tamper-evident audit log</h3><p>Every login, configuration change, and export is written to a hash-chained audit trail — nothing quietly disappears from the record.</p></div>
+        <div class="feature-card"><h3>Config bundles</h3><p>Export and import rules, streams, devices, users, dashboards, reports, and vendor parser packs as one signed, portable file.</p></div>
+        <div class="feature-card"><h3>Self-monitoring &amp; self-update</h3><p>The collector watches its own queue depth, disk space, and archive integrity and alerts on trouble; an optional, off-by-default checker can find, download, and verify a new signed release for you.</p></div>
+        <div class="feature-card"><h3>Runs as a Windows Service</h3><p>Installs once and keeps collecting through reboots, logons, and logoffs, managed entirely from a self-hosted HTTPS dashboard your network alone can reach.</p></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="support">Built and maintained by Vision Software Solutions. If these tools save you time, consider chipping in to support ongoing development.</div>
+    <a class="kofi" href="https://ko-fi.com/vsoft" target="_blank" rel="noopener">Support on Ko-fi</a>
+    <div style="margin-top:18px;">© 2026 Vision Software Solutions</div>
+  </div>
+</footer>
+
+</body>
+</html>
