@@ -3,139 +3,220 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Updates — Vision Software Solutions</title>
-<meta name="description" content="Latest downloads, release notes, and upgrade instructions for VSoftSol Syslog Manager and vSoft-Network-Backup.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M6 6 L20 32 L34 6' fill='none' stroke='%231a56db' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<title>Updates &amp; Release Notes — Vision Software Solutions</title>
+<meta name="description" content="Latest downloads, release notes, checksums, and upgrade instructions for VSoftSol Syslog Manager and vSoft-Network-Backup.">
+<meta name="theme-color" content="#0a1120">
+<link rel="canonical" href="https://www.vsoftsol.com/updates.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vision Software Solutions">
+<meta property="og:title" content="Updates &amp; Release Notes — Vision Software Solutions">
+<meta property="og:description" content="Latest downloads, release notes, checksums, and upgrade instructions.">
+<meta property="og:url" content="https://www.vsoftsol.com/updates.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
+<script>
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (!t) t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    document.documentElement.classList.add('js');
+  })();
+</script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="site-nav">
   <div class="wrap">
-    <a class="brand" href="/">
+    <a class="brand" href="/" aria-label="Vision Software Solutions home">
       <svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1a56db"/><stop offset="1" stop-color="#2e9e6b"/></linearGradient></defs><path d="M6 6 L20 32 L34 6" fill="none" stroke="url(#g1)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span>Vision Software Solutions</span>
+      <span>Vision Software<small>Solutions</small></span>
     </a>
-    <nav class="links">
-      <a href="/">Home</a>
-      <a href="/#network-backup">Network Backup</a>
+    <nav class="links" id="site-links" aria-label="Main">
+      <a href="/#products">Products</a>
       <a href="/#syslog-manager">Syslog Manager</a>
+      <a href="/#network-backup">Network Backup</a>
+      <a href="/#why">Why us</a>
+      <a href="/#faq">FAQ</a>
       <a href="/updates.html" aria-current="page">Updates</a>
     </nav>
+    <div class="nav-actions">
+      <button class="icon-btn theme-toggle" type="button" aria-label="Toggle dark mode">
+        <svg class="i sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="i moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <a class="btn btn-blue btn-sm" href="/#products">Download</a>
+      <button class="icon-btn menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-links">
+        <svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
-<main>
-  <div class="wrap">
-
-    <div class="page-head">
-      <div class="kicker">Updates</div>
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Updates</span>
       <h1>Latest releases and upgrade instructions</h1>
-      <p>Download the newest version of each product, see what changed, and learn how to upgrade without losing your data.</p>
+      <p>Download the newest version of each product, verify its checksum, see what changed, and upgrade without losing your data.</p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="filter-bar">
+      <div class="tabs" role="tablist" aria-label="Filter by product" id="product-filter">
+        <button class="tab" role="tab" aria-selected="true" data-product="all">All products</button>
+        <button class="tab" role="tab" aria-selected="false" data-product="syslog">Syslog Manager</button>
+        <button class="tab" role="tab" aria-selected="false" data-product="backup">Network Backup</button>
+      </div>
+      <span class="api-status" id="api-status">Checking GitHub for the latest releases…</span>
     </div>
 
-    <!-- ===================== Syslog Manager latest ===================== -->
-    <article class="release-card latest" id="syslog-manager-latest">
-      <div class="release-top">
-        <div>
-          <h2>VSoftSol Syslog Manager v1.1.1 <span class="tag">Latest</span></h2>
-          <div class="release-meta">Released September 23, 2026</div>
+    <!-- ===================== Syslog Manager ===================== -->
+    <div class="product-block" data-product="syslog">
+      <article class="release-card latest" id="syslog-manager-latest">
+        <div class="release-top">
+          <div>
+            <h2>VSoftSol Syslog Manager <span data-rel="syslog.version">v1.1.1</span> <span class="chip">Latest</span></h2>
+            <div class="release-meta">Released <span data-rel="syslog.date">September 23, 2026</span></div>
+          </div>
+          <a class="btn btn-syslog" data-rel-href="syslog.url" href="https://github.com/saqibtechnn/vsoftsol-syslog-manager/releases/latest">
+            <svg class="i" viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
+            Download installer (<span data-rel="syslog.size">11.8 MB</span>)
+          </a>
         </div>
-        <a class="btn btn-syslog" href="https://github.com/saqibtechnn/vsoftsol-syslog-manager/releases/latest/download/VSoftSolSyslogManagerSetup-1.1.1.msi">⬇ Download installer (11.8 MB)</a>
-      </div>
 
-      <table class="meta-table">
-        <tr><th>File</th><td><code>VSoftSolSyslogManagerSetup-1.1.1.msi</code></td></tr>
-        <tr><th>SHA-256</th><td><code>85997bd8eacb38d5914ee56c437e23ff49cd3deb9bfd90354571bfa16eec5c9a</code></td></tr>
-        <tr><th>Requirements</th><td>Windows Server 2019 or later, or Windows 10 / 11 (64-bit). The ASP.NET Core 8 Runtime (Hosting Bundle) must be installed first.</td></tr>
-        <tr><th>Install as</th><td>Administrator (right-click the MSI &rarr; Run as administrator, or run it from an elevated prompt).</td></tr>
-      </table>
+        <table class="meta-table">
+          <tr><th>File</th><td><code data-rel="syslog.file">VSoftSolSyslogManagerSetup-1.1.1.msi</code></td></tr>
+          <tr><th>SHA-256</th><td><code data-rel="syslog.sha">85997bd8eacb38d5914ee56c437e23ff49cd3deb9bfd90354571bfa16eec5c9a</code> <button class="copy-btn" type="button" data-copy="syslog.sha">Copy</button></td></tr>
+          <tr><th>Requirements</th><td>Windows Server 2019 or later, or Windows 10 / 11 (64-bit). The ASP.NET Core 8 Runtime (Hosting Bundle) must be installed first.</td></tr>
+          <tr><th>Install as</th><td>Administrator (right-click the MSI &rarr; Run as administrator, or run it from an elevated prompt).</td></tr>
+        </table>
 
-      <h3>What’s new</h3>
-      <ul>
-        <li><strong>Update checks (opt-in, off by default).</strong> Settings &rarr; Updates can periodically check for a newer release, download it, and verify its cryptographic signature and hash. Nothing installs itself — you download the verified installer and run it, exactly as described below. A release that fails verification is never offered and is recorded in the audit log.</li>
-        <li><strong>Fixed: exporting a config bundle.</strong> Settings &rarr; Config bundles &rarr; Export returned an error page. It now downloads the signed bundle.</li>
-        <li><strong>Fixed: “Run now” report downloads and the first-run “Waiting for messages” page.</strong> Both hit the same underlying error; on-demand PDF/CSV reports download again, and the first-run page auto-advances to the dashboard once your first message arrives.</li>
-        <li><strong>Fixed: the installer’s .NET Runtime check.</strong> Earlier installers reported the ASP.NET Core Hosting Bundle as missing on every machine, even when it was installed. This build passes the check correctly.</li>
-        <li>The product’s internal version number now matches its release version.</li>
-      </ul>
-
-      <h3 id="how-to-update">How to update an existing install</h3>
-      <ol>
-        <li>Download the installer above and, if you like, compare its SHA-256 with the value shown (<code>certutil -hashfile VSoftSolSyslogManagerSetup-1.1.1.msi SHA256</code>).</li>
-        <li>Run it as Administrator directly over your existing install — there is no need to uninstall first.</li>
-        <li>The service is stopped and restarted automatically. Expect a brief gap in collection (seconds to low tens of seconds); schedule the upgrade outside your busiest period if that matters, since a long gap can drop UDP datagrams.</li>
-      </ol>
-      <p style="margin:14px 0 0;color:var(--text-2);font-size:15px;">Your database (events, streams, rules, alerts, dashboards, reports, users, audit log), data directory, HTTPS certificate, and listener-port overrides are all preserved.</p>
-      <p style="margin:10px 0 0;color:var(--text-2);font-size:15px;"><strong>Tip:</strong> before any upgrade you can take an extra safety copy with Settings &rarr; Config bundles &rarr; Export (rules, streams, devices, users, dashboards, reports, parser packs), or copy the whole data directory while the service is stopped.</p>
-    </article>
-
-    <!-- ===================== Network Backup latest ===================== -->
-    <article class="release-card" id="network-backup-latest">
-      <div class="release-top">
-        <div>
-          <h2>vSoft-Network-Backup v2.9.6 Build 012 <span class="tag beta">Beta</span></h2>
-          <div class="release-meta">Current public build</div>
+        <div id="syslog-notes" data-curated-version="v1.1.1">
+          <h3>What’s new</h3>
+          <ul>
+            <li><strong>Update checks (opt-in, off by default).</strong> Settings &rarr; Updates can periodically check for a newer release, download it, and verify its cryptographic signature and hash. Nothing installs itself — you download the verified installer and run it, exactly as described below. A release that fails verification is never offered and is recorded in the audit log.</li>
+            <li><strong>Fixed: exporting a config bundle.</strong> Settings &rarr; Config bundles &rarr; Export returned an error page. It now downloads the signed bundle.</li>
+            <li><strong>Fixed: “Run now” report downloads and the first-run “Waiting for messages” page.</strong> Both hit the same underlying error; on-demand PDF/CSV reports download again, and the first-run page auto-advances to the dashboard once your first message arrives.</li>
+            <li><strong>Fixed: the installer’s .NET Runtime check.</strong> Earlier installers reported the ASP.NET Core Hosting Bundle as missing on every machine, even when it was installed. This build passes the check correctly.</li>
+            <li>The product’s internal version number now matches its release version.</li>
+          </ul>
         </div>
-        <a class="btn btn-blue" href="https://github.com/saqibtechnn/vSoft-Baclup-Updates/releases/latest/download/CiscoConfigBackup-Beta-Setup.exe">⬇ Download installer (25.4 MB)</a>
+
+        <h3 id="how-to-update">How to update an existing install</h3>
+        <ol>
+          <li>Download the installer above and, if you like, compare its SHA-256 with the value shown (<code>certutil -hashfile <span data-rel="syslog.file">VSoftSolSyslogManagerSetup-1.1.1.msi</span> SHA256</code>).</li>
+          <li>Run it as Administrator directly over your existing install — there is no need to uninstall first.</li>
+          <li>The service is stopped and restarted automatically. Expect a brief gap in collection (seconds to low tens of seconds); schedule the upgrade outside your busiest period if that matters, since a long gap can drop UDP datagrams.</li>
+        </ol>
+        <p class="note">Your database (events, streams, rules, alerts, dashboards, reports, users, audit log), data directory, HTTPS certificate, and listener-port overrides are all preserved.</p>
+        <p class="note"><strong>Tip:</strong> before any upgrade you can take an extra safety copy with Settings &rarr; Config bundles &rarr; Export (rules, streams, devices, users, dashboards, reports, parser packs), or copy the whole data directory while the service is stopped.</p>
+      </article>
+
+      <h2 class="section-title" style="text-align:left;margin:48px 0 20px;">Syslog Manager release history</h2>
+      <div class="timeline" id="history-syslog">
+        <!-- Fallback content; replaced with live GitHub data when available -->
+        <div class="tl-item first"><details><summary><b>v1.1.1</b><span class="chip">Latest</span><span class="date">September 23, 2026</span><span class="expand">See above</span></summary><div class="md"><p>See the release notes above.</p></div></details></div>
+        <div class="tl-item"><details><summary><b>v1.1.0</b><span class="date">September 15, 2026</span><span class="expand">Show notes</span></summary>
+          <div class="md"><ul>
+            <li><strong>TOTP MFA enforced at sign-in.</strong> Enabling MFA on an account now actually changes what signing in requires — a code or unused recovery code, with its own rate limit.</li>
+            <li><strong>Live UDP/TCP listener port changes.</strong> Change either port in Settings &rarr; Listeners and it applies immediately, with no restart.</li>
+            <li><strong>Saved extractors are applied at ingest,</strong> including for devices with no built-in vendor pack.</li>
+            <li><strong>Reports say when a query failed</strong> instead of looking like an empty report.</li>
+            <li><strong>Exact “would have fired” alert preview</strong> for every alert type.</li>
+          </ul></div></details></div>
+        <div class="tl-item"><details><summary><b>v1.0.0</b><span class="date">September 12, 2026</span><span class="expand">Show notes</span></summary>
+          <div class="md"><ul>
+            <li>Universal syslog collection (RFC 3164/5424) plus TLS syslog, SNMP traps, and a Windows Event Log forwarder endpoint.</li>
+            <li>17 vendor parser packs and a Pattern Tester for your own.</li>
+            <li>Search language, rules and alerts, dashboards, and scheduled PDF/CSV reports including compliance templates.</li>
+            <li>Hot/warm/cold retention with verified archives, role-based access, TOTP MFA enrollment, audit log, and signed configuration bundles.</li>
+            <li>Signed MSI installer with a five-step first-run wizard.</li>
+          </ul></div></details></div>
       </div>
-      <table class="meta-table">
-        <tr><th>Requirements</th><td>Windows 10 / 11 (64-bit).</td></tr>
-        <tr><th>Install as</th><td>Administrator.</td></tr>
-        <tr><th>Release notes</th><td><a href="https://github.com/saqibtechnn/vSoft-Baclup-Updates/releases">GitHub releases page</a></td></tr>
-      </table>
-    </article>
+    </div>
 
-    <!-- ===================== Earlier Syslog Manager releases ===================== -->
-    <h2 class="section-title" style="margin-top:56px;">Earlier VSoftSol Syslog Manager releases</h2>
-
-    <article class="release-card">
-      <div class="release-top">
-        <div>
-          <h2 style="font-size:20px;">v1.1.0</h2>
-          <div class="release-meta">September 15, 2026 · superseded by v1.1.1 (its installer has the .NET Runtime check bug fixed in v1.1.1)</div>
+    <!-- ===================== Network Backup ===================== -->
+    <div class="product-block" data-product="backup">
+      <article class="release-card" id="network-backup-latest">
+        <div class="release-top">
+          <div>
+            <h2>vSoft-Network-Backup <span data-rel="backup.version">v2.9.6 Build 022</span> <span class="chip beta">Beta</span></h2>
+            <div class="release-meta">Released <span data-rel="backup.date">September 15, 2026</span></div>
+          </div>
+          <a class="btn btn-blue" data-rel-href="backup.url" href="https://github.com/saqibtechnn/vSoft-Baclup-Updates/releases/latest/download/CiscoConfigBackup-Beta-Setup.exe">
+            <svg class="i" viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
+            Download installer (<span data-rel="backup.size">25.4 MB</span>)
+          </a>
         </div>
-      </div>
-      <ul style="margin-top:14px;">
-        <li><strong>TOTP MFA enforced at sign-in.</strong> Enabling MFA on an account now actually changes what signing in requires — a code or unused recovery code, with its own rate limit.</li>
-        <li><strong>Live UDP/TCP listener port changes.</strong> Change either port in Settings &rarr; Listeners and it applies immediately, with no restart; a mistyped or already-used port is rejected and the previous port keeps running.</li>
-        <li><strong>Saved extractors are applied at ingest,</strong> including for devices with no built-in vendor pack.</li>
-        <li><strong>Reports say when a query failed</strong> instead of looking like an empty report.</li>
-        <li><strong>Exact “would have fired” alert preview</strong> for every alert type, and a correct warning when a very busy window’s count is a lower bound.</li>
-        <li>Every stored message now links back to the listener that received it; the data-directory relocation procedure is documented.</li>
-      </ul>
-    </article>
+        <table class="meta-table">
+          <tr><th>File</th><td><code data-rel="backup.file">CiscoConfigBackup-Beta-Setup.exe</code></td></tr>
+          <tr><th>SHA-256</th><td><code data-rel="backup.sha">56de61a0a1e7164efed36da71665bbfc881fe04feba47500115c8e8db4506ca2</code> <button class="copy-btn" type="button" data-copy="backup.sha">Copy</button></td></tr>
+          <tr><th>Requirements</th><td>Windows 10 / 11 (64-bit).</td></tr>
+          <tr><th>Install as</th><td>Administrator.</td></tr>
+        </table>
+      </article>
 
-    <article class="release-card">
-      <div class="release-top">
-        <div>
-          <h2 style="font-size:20px;">v1.0.0</h2>
-          <div class="release-meta">September 12, 2026 · first general release</div>
-        </div>
+      <h2 class="section-title" style="text-align:left;margin:48px 0 20px;">Network Backup release history</h2>
+      <div class="timeline" id="history-backup">
+        <p class="note" style="color:var(--text-2)">Full release notes for every build are on the <a href="https://github.com/saqibtechnn/vSoft-Baclup-Updates/releases">GitHub releases page</a>.</p>
       </div>
-      <ul style="margin-top:14px;">
-        <li>Universal syslog collection (RFC 3164/5424) plus TLS syslog, SNMP traps, and a Windows Event Log forwarder endpoint — nothing dropped for coming from an unrecognised vendor.</li>
-        <li>17 vendor parser packs and a Pattern Tester for your own.</li>
-        <li>Search language, rules and alerts, dashboards, and scheduled PDF/CSV reports including compliance templates.</li>
-        <li>Hot/warm/cold retention with verified archives, role-based access, TOTP MFA enrollment, audit log, and signed configuration bundles.</li>
-        <li>Signed MSI installer with a five-step first-run wizard, designed to get you to your first message in under ten minutes.</li>
-      </ul>
-    </article>
+    </div>
 
-    <p style="text-align:center;color:var(--text-3);font-size:14px;margin:8px 0 64px;">
-      Every release is also listed on the <a href="https://github.com/saqibtechnn/vsoftsol-syslog-manager/releases">Syslog Manager GitHub releases page</a>.
+    <p style="text-align:center;color:var(--text-3);font-size:14px;margin:24px 0 80px;">
+      Release data is loaded live from GitHub. Every release is also listed on the
+      <a href="https://github.com/saqibtechnn/vsoftsol-syslog-manager/releases">Syslog Manager</a> and
+      <a href="https://github.com/saqibtechnn/vSoft-Baclup-Updates/releases">Network Backup</a> GitHub releases pages.
     </p>
-
   </div>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <div class="support">Built and maintained by Vision Software Solutions. If these tools save you time, consider chipping in to support ongoing development.</div>
-    <a class="kofi" href="https://ko-fi.com/vsoft" target="_blank" rel="noopener">Support on Ko-fi</a>
-    <div style="margin-top:18px;">© 2026 Vision Software Solutions</div>
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="/">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 6 L20 32 L34 6" fill="none" stroke="url(#g1)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Vision Software Solutions</span>
+        </a>
+        <p class="support">Built and maintained by Vision Software Solutions. If these tools save you time, consider chipping in to support ongoing development.</p>
+        <a class="kofi" href="https://ko-fi.com/vsoft" target="_blank" rel="noopener">♥ Support on Ko-fi</a>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul>
+          <li><a href="/#syslog-manager">Syslog Manager</a></li>
+          <li><a href="/#network-backup">Network Backup</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="/updates.html">Updates &amp; release notes</a></li>
+          <li><a href="/updates.html#how-to-update">Upgrade guide</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>GitHub</h4>
+        <ul>
+          <li><a href="https://github.com/saqibtechnn/vsoftsol-syslog-manager/releases" target="_blank" rel="noopener">Syslog Manager releases</a></li>
+          <li><a href="https://github.com/saqibtechnn/vSoft-Baclup-Updates/releases" target="_blank" rel="noopener">Network Backup releases</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span class="year">2026</span> Vision Software Solutions. All rights reserved.</span>
+      <a href="#main">Back to top ↑</a>
+    </div>
   </div>
 </footer>
 
+<script src="/app.js" defer></script>
 </body>
 </html>
