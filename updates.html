@@ -12,20 +12,14 @@
 <meta property="og:title" content="Updates &amp; Release Notes — Vision Software Solutions">
 <meta property="og:description" content="Latest downloads, release notes, checksums, and upgrade instructions.">
 <meta property="og:url" content="https://www.vsoftsol.com/updates.html">
+<meta property="og:image" content="https://www.vsoftsol.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
-<script>
-  (function () {
-    var t = null;
-    try { t = localStorage.getItem('theme'); } catch (e) {}
-    if (!t) t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', t);
-    document.documentElement.classList.add('js');
-  })();
-</script>
+<script src="/theme.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -42,6 +36,7 @@
       <a href="/#network-backup">Network Backup</a>
       <a href="/#why">Why us</a>
       <a href="/#faq">FAQ</a>
+      <a href="/docs/">Docs</a>
       <a href="/updates.html" aria-current="page">Updates</a>
     </nav>
     <div class="nav-actions">
@@ -68,10 +63,10 @@
 
   <div class="wrap">
     <div class="filter-bar">
-      <div class="tabs" role="tablist" aria-label="Filter by product" id="product-filter">
-        <button class="tab" role="tab" aria-selected="true" data-product="all">All products</button>
-        <button class="tab" role="tab" aria-selected="false" data-product="syslog">Syslog Manager</button>
-        <button class="tab" role="tab" aria-selected="false" data-product="backup">Network Backup</button>
+      <div class="tabs" role="group" aria-label="Filter by product" id="product-filter">
+        <button class="tab" aria-pressed="true" data-product="all">All products</button>
+        <button class="tab" aria-pressed="false" data-product="syslog">Syslog Manager</button>
+        <button class="tab" aria-pressed="false" data-product="backup">Network Backup</button>
       </div>
       <span class="api-status" id="api-status">Checking GitHub for the latest releases…</span>
     </div>
@@ -199,6 +194,7 @@
         <ul>
           <li><a href="/updates.html">Updates &amp; release notes</a></li>
           <li><a href="/updates.html#how-to-update">Upgrade guide</a></li>
+          <li><a href="/docs/">Documentation</a></li>
           <li><a href="/#faq">FAQ</a></li>
         </ul>
       </div>
