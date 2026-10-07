@@ -12,22 +12,14 @@
 <meta property="og:title" content="Vision Software Solutions — Windows tools for network &amp; security teams">
 <meta property="og:description" content="On-premises syslog management and Cisco config backup for Windows. No cloud account required.">
 <meta property="og:url" content="https://www.vsoftsol.com/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://www.vsoftsol.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
-<script>
-  // Apply the saved/system theme before paint to avoid a flash.
-  (function () {
-    var t = null;
-    try { t = localStorage.getItem('theme'); } catch (e) {}
-    if (!t) t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', t);
-    document.documentElement.classList.add('js');
-  })();
-</script>
+<script src="/theme.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,6 +45,7 @@
       <a href="#network-backup">Network Backup</a>
       <a href="#why">Why us</a>
       <a href="#faq">FAQ</a>
+      <a href="/docs/">Docs</a>
       <a href="/updates.html">Updates</a>
     </nav>
     <div class="nav-actions">
@@ -237,12 +230,12 @@
 
       <h3 class="section-title reveal" id="sm-features">Everything you need to collect, watch, and report on your logs</h3>
       <div class="feature-set syslog-features">
-        <div class="tabs" role="tablist" aria-label="Syslog Manager feature categories">
-          <button class="tab" role="tab" aria-selected="true" data-filter="all">All</button>
-          <button class="tab" role="tab" aria-selected="false" data-filter="collect">Collect</button>
-          <button class="tab" role="tab" aria-selected="false" data-filter="analyze">Analyze</button>
-          <button class="tab" role="tab" aria-selected="false" data-filter="secure">Secure</button>
-          <button class="tab" role="tab" aria-selected="false" data-filter="operate">Operate</button>
+        <div class="tabs" role="group" aria-label="Syslog Manager feature categories">
+          <button class="tab" aria-pressed="true" data-filter="all">All</button>
+          <button class="tab" aria-pressed="false" data-filter="collect">Collect</button>
+          <button class="tab" aria-pressed="false" data-filter="analyze">Analyze</button>
+          <button class="tab" aria-pressed="false" data-filter="secure">Secure</button>
+          <button class="tab" aria-pressed="false" data-filter="operate">Operate</button>
         </div>
         <div class="feature-grid">
           <div class="feature-card" data-cat="collect"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M4 14a8 8 0 0 1 16 0M8 14a4 4 0 0 1 8 0"/><circle cx="12" cy="14" r="1"/></svg></div><h3>Universal syslog collection</h3><p>UDP, TCP, and TLS syslog listeners, plus SNMP v1/v2c trap intake and an authenticated Windows Event Log forwarder endpoint.</p></div>
@@ -317,11 +310,11 @@
 
       <h3 class="section-title reveal" id="nb-features">Everything you need to protect your network configs</h3>
       <div class="feature-set">
-        <div class="tabs" role="tablist" aria-label="Network Backup feature categories">
-          <button class="tab" role="tab" aria-selected="true" data-filter="all">All</button>
-          <button class="tab" role="tab" aria-selected="false" data-filter="backup">Backup &amp; restore</button>
-          <button class="tab" role="tab" aria-selected="false" data-filter="secure">Security</button>
-          <button class="tab" role="tab" aria-selected="false" data-filter="operate">Operations</button>
+        <div class="tabs" role="group" aria-label="Network Backup feature categories">
+          <button class="tab" aria-pressed="true" data-filter="all">All</button>
+          <button class="tab" aria-pressed="false" data-filter="backup">Backup &amp; restore</button>
+          <button class="tab" aria-pressed="false" data-filter="secure">Security</button>
+          <button class="tab" aria-pressed="false" data-filter="operate">Operations</button>
         </div>
         <div class="feature-grid">
           <div class="feature-card" data-cat="backup"><div class="ico"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Scheduled config backups</h3><p>Set daily, weekly, or custom schedules per device and let vSoft-Network-Backup pull configs automatically — no manual exports.</p></div>
@@ -426,6 +419,7 @@
         <ul>
           <li><a href="/updates.html">Updates &amp; release notes</a></li>
           <li><a href="/updates.html#how-to-update">Upgrade guide</a></li>
+          <li><a href="/docs/">Documentation</a></li>
           <li><a href="/#faq">FAQ</a></li>
         </ul>
       </div>
