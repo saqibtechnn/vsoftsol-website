@@ -229,12 +229,21 @@
 
   /* ---------------- Live release data from GitHub ---------------- */
   var PRODUCTS = {
+    // "syslog" is the Update file (the MSI); "syslogInstall" is the new-installation bundle (.exe).
     syslog: { repo: 'saqibtechnn/vsoftsol-syslog-manager', asset: /\.msi$/i },
+    syslogInstall: { repo: 'saqibtechnn/vsoftsol-syslog-manager', asset: /^VSoftSolSyslogManagerInstall-.*\.exe$/i },
     backup: { repo: 'saqibtechnn/vSoft-Baclup-Updates', asset: /^CiscoConfigBackup-Beta-Setup\.exe$/i }
   };
   var CACHE_MS = 10 * 60 * 1000;
 
+  var inflight = {};
   function fetchReleases(repo) {
+    // Two entries can share a repo (Update + New installation); make one API request for both.
+    if (!inflight[repo]) inflight[repo] = fetchReleasesOnce(repo);
+    return inflight[repo];
+  }
+
+  function fetchReleasesOnce(repo) {
     var key = 'rel:' + repo;
     var cached = get('sessionStorage', key);
     if (cached) {

@@ -84,7 +84,7 @@
         <h2>Requirements</h2>
         <ul>
           <li><strong>Windows Server 2019 or later</strong>, or Windows 10 / 11 (64-bit).</li>
-          <li><strong>ASP.NET Core Runtime 8.0.x (Hosting Bundle)</strong> — install it first from <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank" rel="noopener">dotnet.microsoft.com</a>.</li>
+          <li><strong>ASP.NET Core Runtime 8.0.x (Hosting Bundle)</strong> — the <em>new-installation</em> file installs it for you if it is missing. If you use the smaller <em>update</em> file instead, install it first from <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank" rel="noopener">dotnet.microsoft.com</a>.</li>
           <li>Administrator rights to run the installer.</li>
           <li>An SSD for the data directory is strongly recommended. See <a href="#sizing">Sizing</a> for CPU, RAM and disk.</li>
         </ul>
@@ -93,10 +93,11 @@
       <section id="install">
         <h2>Install</h2>
         <ol class="steps-list">
-          <li><strong>Download</strong> the latest installer from the <a href="/updates.html#syslog-manager-latest">Updates page</a> and, optionally, verify its SHA-256:
-            <pre><code>certutil -hashfile <span data-rel="syslog.file">VSoftSolSyslogManagerSetup-1.1.1.msi</span> SHA256</code></pre>
+          <li><strong>Download</strong> the <em>new-installation</em> file from the <a href="/updates.html#new-install">Updates page</a> (for an existing install, use the <a href="/updates.html#update-file">update file</a> instead) and, optionally, verify its SHA-256:
+            <pre><code>certutil -hashfile <span data-rel="syslogInstall.file">VSoftSolSyslogManagerInstall-1.1.2.exe</span> SHA256</code></pre>
+            These installers are not code-signed yet, so Windows may show an “Unknown publisher” warning — checking the hash is how you confirm the file is genuine.
           </li>
-          <li><strong>Run the MSI as Administrator.</strong> It installs to <code>C:\Program Files\VSoftSol Syslog Manager</code>, creates the data directory at <code>C:\ProgramData\Vision Software Solutions\VSoftSol Syslog Manager</code> (restricted to the service account and Administrators), registers one Windows Service, and opens three firewall rules: UDP 514, TCP 514 and TCP 5443.</li>
+          <li><strong>Run it and approve the administrator prompt.</strong> It installs to <code>C:\Program Files\VSoftSol Syslog Manager</code>, creates the data directory at <code>C:\ProgramData\Vision Software Solutions\VSoftSol Syslog Manager</code> (restricted to the service account and Administrators), registers one Windows Service, and opens three firewall rules: UDP 514, TCP 514 and TCP 5443.</li>
           <li><strong>Open the dashboard</strong> at <code>https://&lt;this-server&gt;:5443</code>. Your browser will warn about the self-signed certificate on first visit — that is expected; see <a href="#certificate">HTTPS certificate</a> to replace it.</li>
         </ol>
         <div class="callout">
