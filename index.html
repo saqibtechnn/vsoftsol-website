@@ -69,7 +69,7 @@
       <div>
         <a class="announce" href="/updates.html#syslog-manager-latest">
           <span class="pill">New</span>
-          <span>Syslog Manager <span data-rel="syslog.version">v1.1.1</span> is out</span>
+          <span>Syslog Manager <span data-rel="syslog.version">v1.1.2</span> is out</span>
           <svg class="i" viewBox="0 0 24 24" width="14" height="14"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
         </a>
         <h1>Network visibility and recovery, <span class="grad-text">on your own servers.</span></h1>
@@ -141,7 +141,7 @@
             <li><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Roles, TOTP MFA &amp; hash-chained audit log</li>
           </ul>
           <div class="pick-foot">
-            <span class="chip"><span data-rel="syslog.version">v1.1.1</span> · Latest</span>
+            <span class="chip"><span data-rel="syslog.version">v1.1.2</span> · Latest</span>
             <span class="go">Learn more <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
           </div>
         </a>
@@ -179,18 +179,22 @@
           <p class="tagline">One Windows Service. No Elasticsearch, no Java, no Docker, no message broker.</p>
           <div class="about-copy">
             <p>Collects UDP, TCP, TLS, SNMP trap, and Windows Event Log traffic, and parses it with 17 built-in vendor packs — Cisco IOS/IOS-XE and ASA, Fortinet, Palo Alto, Juniper, MikroTik, Ubiquiti, Check Point, Sophos, SonicWall, pfSense/OPNsense, Aruba, Huawei, VMware ESXi, and Linux — or with extractors you write yourself.</p>
-            <p>Nothing about it needs the internet to run. The one exception is entirely opt-in: an update checker, off by default, that only offers a release after its cryptographic signature has verified.</p>
+            <p>Nothing about it needs the internet to run — it installs as a single Windows Service bound to your own network, and the new-installation file even carries its own .NET prerequisite so a first install works on a server with no internet access.</p>
           </div>
           <div class="cta-row">
-            <a class="btn btn-syslog" data-rel-href="syslog.url" href="https://github.com/saqibtechnn/vsoftsol-syslog-manager/releases/latest">
+            <a class="btn btn-syslog" data-rel-href="syslogInstall.url" href="https://github.com/saqibtechnn/vsoftsol-syslog-manager/releases/latest">
               <svg class="i" viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
-              Download <span data-rel="syslog.version">v1.1.1</span>
+              New installation <span data-rel="syslog.version">v1.1.2</span>
+            </a>
+            <a class="btn btn-ghost" data-rel-href="syslog.url" href="https://github.com/saqibtechnn/vsoftsol-syslog-manager/releases/latest">
+              Update an existing install
             </a>
             <a class="btn btn-ghost" href="#sm-features">See features</a>
           </div>
           <div class="version-line">
-            <span data-rel="syslog.size">11.8 MB</span><span class="dot"></span>
-            <span>Released <span data-rel="syslog.date">Sep 23, 2026</span></span><span class="dot"></span>
+            <span>New install <span data-rel="syslogInstall.size">118.2 MB</span> (includes .NET)</span><span class="dot"></span>
+            <span>Update <span data-rel="syslog.size">11.8 MB</span></span><span class="dot"></span>
+            <span>Released <span data-rel="syslog.date">Oct 7, 2026</span></span><span class="dot"></span>
             <span>Windows Server 2019+ / Windows 10 / 11 (64-bit)</span>
           </div>
         </div>
@@ -223,7 +227,7 @@
 
       <h3 class="section-title reveal">From install to first message, fast</h3>
       <div class="steps">
-        <div class="step reveal"><h3>Install</h3><p>Run the signed MSI, then walk through a five-step first-run wizard that sets up your admin account and HTTPS certificate.</p></div>
+        <div class="step reveal"><h3>Install</h3><p>Run the new-installation file — it installs the .NET prerequisite for you if it is missing — then walk through a five-step first-run wizard that sets up your admin account and HTTPS certificate.</p></div>
         <div class="step reveal d1"><h3>Point your devices at it</h3><p>A “Waiting for messages” page shows copy-ready configuration commands with this server’s own address filled in, and opens the dashboard the moment the first message arrives.</p></div>
         <div class="step reveal d2"><h3>Search, alert, report</h3><p>Query with a real search language, build rules and alerts, watch live dashboards, and schedule PDF/CSV reports by email.</p></div>
       </div>
@@ -248,13 +252,13 @@
           <div class="feature-card" data-cat="secure"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div><h3>Roles, MFA &amp; audit trail</h3><p>Four roles with per-user visibility scope, optional TOTP MFA, Argon2id password hashing, and a hash-chained audit log so nothing quietly disappears.</p></div>
           <div class="feature-card" data-cat="secure"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M21 16V8l-9-5-9 5v8l9 5z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg></div><h3>Config bundles</h3><p>Export and import rules, streams, devices, users, dashboards, reports, and vendor parser packs as one signed, portable file.</p></div>
           <div class="feature-card" data-cat="operate"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h3>Self-monitoring</h3><p>The collector watches its own queue depth, dropped messages, disk space, and archive integrity — and alerts you when something needs attention.</p></div>
-          <div class="feature-card" data-cat="secure"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></svg></div><h3>Opt-in signed updates</h3><p>Off by default. When enabled, it checks for a new release, downloads it, and verifies its signature and hash — you always run the installer yourself.</p></div>
+          <div class="feature-card" data-cat="secure"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></svg></div><h3>Safe in-place upgrades</h3><p>Run the small Update file over an existing install: your database, HTTPS certificate, and settings are all kept, and the service restarts itself.</p></div>
           <div class="feature-card" data-cat="operate"><div class="ico"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><h3>Runs as a Windows Service</h3><p>Installs once under a dedicated least-privilege account and keeps collecting through reboots, logons, and logoffs — managed from a self-hosted HTTPS dashboard.</p></div>
         </div>
       </div>
 
       <div class="whatsnew reveal">
-        <div><strong>What’s new in <span data-rel="syslog.version">v1.1.1</span></strong><span>Opt-in signed update check, fixes to config export and report downloads, and an installer prerequisite-check fix.</span></div>
+        <div><strong>What’s new in <span data-rel="syslog.version">v1.1.2</span></strong><span>Separate Update and New-installation downloads, and fixes to config export, report downloads, and the installer prerequisite check.</span></div>
         <a class="btn btn-ghost btn-sm" href="/updates.html#syslog-manager-latest">Read the release notes →</a>
       </div>
     </div>
@@ -362,7 +366,7 @@
         </details>
         <details>
           <summary>Do the products need an internet connection?</summary>
-          <p>No. Both run entirely on your own network. Syslog Manager has one optional feature that uses the internet — an update checker that is off by default and only offers releases whose cryptographic signature verifies.</p>
+          <p>No. Both run entirely on your own network. Syslog Manager does not need the internet to run; you fetch new releases yourself from this site or GitHub and verify them against the published SHA-256.</p>
         </details>
         <details>
           <summary>How do I upgrade to a new version?</summary>
