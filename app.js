@@ -100,7 +100,7 @@
     tabs.forEach(function (tab) {
       tab.addEventListener('click', function () {
         var f = tab.getAttribute('data-filter');
-        tabs.forEach(function (t) { t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+        tabs.forEach(function (t) { t.setAttribute('aria-pressed', t === tab ? 'true' : 'false'); });
         cards.forEach(function (c) { c.hidden = !(f === 'all' || c.getAttribute('data-cat') === f); });
       });
     });
@@ -179,29 +179,49 @@
   $$('.year').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
   /* ---------------- Copy buttons ---------------- */
+  function copyText(text, btn) {
+    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () {});
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  }
   $$('[data-copy]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var src = $('[data-rel="' + btn.getAttribute('data-copy') + '"]');
-      if (!src) return;
-      var text = src.textContent.trim();
-      var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(done, function () {});
-      } else {
-        var ta = document.createElement('textarea');
-        ta.value = text; document.body.appendChild(ta); ta.select();
-        try { document.execCommand('copy'); done(); } catch (e) {}
-        document.body.removeChild(ta);
-      }
+      if (src) copyText(src.textContent.trim(), btn);
     });
   });
+  // Docs: a copy button on every code block.
+  $$('.prose pre').forEach(function (pre) {
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'copy-btn'; btn.textContent = 'Copy';
+    btn.addEventListener('click', function () { copyText(($('code', pre) || pre).textContent.trim(), btn); });
+    pre.appendChild(btn);
+  });
+
+  /* ---------------- Docs: highlight the current section in the TOC ---------------- */
+  var tocLinks = $$('.toc a[href^="#"]');
+  if (tocLinks.length && 'IntersectionObserver' in window) {
+    var tocSpy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        tocLinks.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id); });
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    tocLinks.forEach(function (a) { var s = $(a.getAttribute('href')); if (s) tocSpy.observe(s); });
+  }
 
   /* ---------------- Updates page: product filter ---------------- */
   var filter = $('#product-filter');
   if (filter) {
     var ptabs = $$('.tab', filter);
     var applyFilter = function (p) {
-      ptabs.forEach(function (t) { t.setAttribute('aria-selected', t.getAttribute('data-product') === p ? 'true' : 'false'); });
+      ptabs.forEach(function (t) { t.setAttribute('aria-pressed', t.getAttribute('data-product') === p ? 'true' : 'false'); });
       $$('.product-block').forEach(function (bl) { bl.hidden = !(p === 'all' || bl.getAttribute('data-product') === p); });
     };
     ptabs.forEach(function (t) { t.addEventListener('click', function () { applyFilter(t.getAttribute('data-product')); }); });

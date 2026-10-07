@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Network Backup Guide — Vision Software Solutions</title>
+<meta name="description" content="How to install vSoft-Network-Backup, add Cisco devices, schedule backups, and use Full System Backup and Restore.">
+<meta name="theme-color" content="#0a1120">
+<link rel="canonical" href="https://www.vsoftsol.com/docs/network-backup.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vision Software Solutions">
+<meta property="og:title" content="Network Backup Guide — Vision Software Solutions">
+<meta property="og:description" content="How to install vSoft-Network-Backup, add Cisco devices, schedule backups, and use Full System Backup and Restore.">
+<meta property="og:url" content="https://www.vsoftsol.com/docs/network-backup.html">
+<meta property="og:image" content="https://www.vsoftsol.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<script src="/theme.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Vision Software Solutions home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1a56db"/><stop offset="1" stop-color="#2e9e6b"/></linearGradient></defs><path d="M6 6 L20 32 L34 6" fill="none" stroke="url(#g1)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Vision Software<small>Solutions</small></span>
+    </a>
+    <nav class="links" id="site-links" aria-label="Main">
+      <a href="/#products">Products</a>
+      <a href="/#syslog-manager">Syslog Manager</a>
+      <a href="/#network-backup">Network Backup</a>
+      <a href="/#why">Why us</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/docs/" aria-current="page">Docs</a>
+      <a href="/updates.html">Updates</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn theme-toggle" type="button" aria-label="Toggle dark mode">
+        <svg class="i sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="i moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <a class="btn btn-blue btn-sm" href="/#products">Download</a>
+      <button class="icon-btn menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-links">
+        <svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Docs · vSoft-Network-Backup</span>
+      <h1>Getting started with Network Backup</h1>
+      <p>Install, add your Cisco devices, schedule backups, and protect the tool itself with Full System Backup.</p>
+    </div>
+  </section>
+
+  <div class="wrap doc-layout">
+    <nav class="toc" aria-label="On this page">
+      <h4>On this page</h4>
+      <ol>
+        <li><a href="#requirements">Requirements</a></li>
+        <li><a href="#install">Install</a></li>
+        <li><a href="#devices">Add devices</a></li>
+        <li><a href="#schedules">Schedules &amp; history</a></li>
+        <li><a href="#sftp">SFTP server</a></li>
+        <li><a href="#security">Sign-in &amp; security</a></li>
+        <li><a href="#full-backup">Full System Backup</a></li>
+        <li><a href="#updates">Updating</a></li>
+      </ol>
+    </nav>
+
+    <article class="prose">
+      <section id="requirements">
+        <h2>Requirements</h2>
+        <ul>
+          <li><strong>Windows 10 / 11 (64-bit).</strong></li>
+          <li>Administrator rights to run the installer.</li>
+          <li>SSH reachability from this machine to the Cisco routers and switches you want to back up.</li>
+        </ul>
+      </section>
+
+      <section id="install">
+        <h2>Install</h2>
+        <ol class="steps-list">
+          <li><strong>Download</strong> the latest installer from the <a href="/updates.html#network-backup-latest">Updates page</a> and, optionally, verify its SHA-256:
+            <pre><code>certutil -hashfile <span data-rel="backup.file">CiscoConfigBackup-Beta-Setup.exe</span> SHA256</code></pre>
+          </li>
+          <li><strong>Run it as Administrator.</strong> It installs vSoft-Network-Backup as a Windows Service, so it keeps running in the background through reboots, logons and logoffs.</li>
+          <li><strong>Open the local HTTPS dashboard</strong> to sign in and start adding devices. The dashboard is self-hosted and reachable only from your own network.</li>
+        </ol>
+      </section>
+
+      <section id="devices">
+        <h2>Add devices</h2>
+        <p>Add each Cisco router or switch with its address and credentials. Credentials go into an encrypted vault protected by Windows DPAPI — they are never stored in plain text and never shown back in the UI.</p>
+        <div class="callout">
+          <strong>Approve the SSH host key</strong>
+          The first connection to a new device asks you to approve its SSH host key explicitly. After that, a changed key is flagged rather than trusted silently, protecting you from man-in-the-middle swaps.
+        </div>
+      </section>
+
+      <section id="schedules">
+        <h2>Schedules &amp; history</h2>
+        <p>Give each device a daily, weekly or custom schedule and configurations are pulled automatically — no manual exports. Every backup is kept, and the <strong>diff view</strong> compares any run with the previous one so configuration drift is easy to spot.</p>
+      </section>
+
+      <section id="sftp">
+        <h2>Built-in SFTP server</h2>
+        <p>Alongside the standard SSH pull workflow, a built-in SFTP server gives devices and scripts a secure, central place to push backup files to.</p>
+      </section>
+
+      <section id="security">
+        <h2>Sign-in &amp; security</h2>
+        <ul>
+          <li><strong>Multi-factor authentication</strong> — admin sign-in supports TOTP codes from an authenticator app.</li>
+          <li><strong>RADIUS &amp; TACACS+</strong> — sign-in can defer to your existing AAA infrastructure.</li>
+          <li><strong>SIEM export</strong> — forward security-relevant audit events to a syslog/CEF-speaking SIEM; just set a destination. (VSoftSol Syslog Manager works well as that destination.)</li>
+        </ul>
+      </section>
+
+      <section id="full-backup">
+        <h2>Full System Backup &amp; Restore</h2>
+        <p>Protect the tool itself, not just your device configs. Go to <strong>Settings → Full System Backup</strong>:</p>
+        <ul>
+          <li><strong>Backup now</strong> downloads a <code>.zip</code> snapshot of the database, configuration and certificates — devices, credentials, schedules and settings — with no service downtime.</li>
+          <li><strong>Restore from backup</strong> validates and stages an uploaded snapshot, then a SYSTEM-level scheduled task stops the service, takes an automatic pre-restore safety snapshot, applies the restore and restarts the service.</li>
+        </ul>
+        <div class="callout ok">
+          <strong>Safe by design</strong>
+          If anything fails partway through a restore, it automatically reverts to the pre-restore safety snapshot. A progress page tracks the restore through the service restart.
+        </div>
+        <p>Full System Backup is a same-machine disaster-recovery feature. Keep copies of the downloaded <code>.zip</code> files somewhere other than the server itself.</p>
+      </section>
+
+      <section id="updates">
+        <h2>Updating</h2>
+        <p>Use the in-app <strong>Check for Updates</strong> feature, or download the latest installer from the <a href="/updates.html#network-backup-latest">Updates page</a> and run it as Administrator. Each release is published with its SHA-256 checksum so you can verify it before installing.</p>
+      </section>
+
+      <p style="color:var(--text-3);font-size:14px;">Collecting logs too? Read the <a href="/docs/syslog-manager.html">Syslog Manager guide</a>.</p>
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="/">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 6 L20 32 L34 6" fill="none" stroke="url(#g1)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Vision Software Solutions</span>
+        </a>
+        <p class="support">Built and maintained by Vision Software Solutions. If these tools save you time, consider chipping in to support ongoing development.</p>
+        <a class="kofi" href="https://ko-fi.com/vsoft" target="_blank" rel="noopener">♥ Support on Ko-fi</a>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul>
+          <li><a href="/#syslog-manager">Syslog Manager</a></li>
+          <li><a href="/#network-backup">Network Backup</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="/updates.html">Updates &amp; release notes</a></li>
+          <li><a href="/updates.html#how-to-update">Upgrade guide</a></li>
+          <li><a href="/docs/">Documentation</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>GitHub</h4>
+        <ul>
+          <li><a href="https://github.com/saqibtechnn/vsoftsol-syslog-manager/releases" target="_blank" rel="noopener">Syslog Manager releases</a></li>
+          <li><a href="https://github.com/saqibtechnn/vSoft-Baclup-Updates/releases" target="_blank" rel="noopener">Network Backup releases</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span class="year">2026</span> Vision Software Solutions. All rights reserved.</span>
+      <a href="#main">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/app.js" defer></script>
+</body>
+</html>

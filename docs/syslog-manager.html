@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Syslog Manager Guide — Vision Software Solutions</title>
+<meta name="description" content="How to install, configure, upgrade, back up, size and troubleshoot VSoftSol Syslog Manager on Windows.">
+<meta name="theme-color" content="#0a1120">
+<link rel="canonical" href="https://www.vsoftsol.com/docs/syslog-manager.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vision Software Solutions">
+<meta property="og:title" content="Syslog Manager Guide — Vision Software Solutions">
+<meta property="og:description" content="How to install, configure, upgrade, back up, size and troubleshoot VSoftSol Syslog Manager on Windows.">
+<meta property="og:url" content="https://www.vsoftsol.com/docs/syslog-manager.html">
+<meta property="og:image" content="https://www.vsoftsol.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<script src="/theme.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Vision Software Solutions home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1a56db"/><stop offset="1" stop-color="#2e9e6b"/></linearGradient></defs><path d="M6 6 L20 32 L34 6" fill="none" stroke="url(#g1)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Vision Software<small>Solutions</small></span>
+    </a>
+    <nav class="links" id="site-links" aria-label="Main">
+      <a href="/#products">Products</a>
+      <a href="/#syslog-manager">Syslog Manager</a>
+      <a href="/#network-backup">Network Backup</a>
+      <a href="/#why">Why us</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/docs/" aria-current="page">Docs</a>
+      <a href="/updates.html">Updates</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn theme-toggle" type="button" aria-label="Toggle dark mode">
+        <svg class="i sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="i moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <a class="btn btn-blue btn-sm" href="/#products">Download</a>
+      <button class="icon-btn menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-links">
+        <svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Docs · VSoftSol Syslog Manager</span>
+      <h1>Getting started with Syslog Manager</h1>
+      <p>Install, first run, connecting devices, upgrades, backups, sizing and troubleshooting — everything you need to run it in production.</p>
+    </div>
+  </section>
+
+  <div class="wrap doc-layout">
+    <nav class="toc" aria-label="On this page">
+      <h4>On this page</h4>
+      <ol>
+        <li><a href="#requirements">Requirements</a></li>
+        <li><a href="#install">Install</a></li>
+        <li><a href="#first-run">First run</a></li>
+        <li><a href="#devices">Connect devices</a></li>
+        <li><a href="#search">Search basics</a></li>
+        <li><a href="#ports">Ports &amp; firewall</a></li>
+        <li><a href="#upgrade">Upgrading</a></li>
+        <li><a href="#backup">Backup &amp; restore</a></li>
+        <li><a href="#certificate">HTTPS certificate</a></li>
+        <li><a href="#sizing">Sizing</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+      </ol>
+    </nav>
+
+    <article class="prose">
+      <section id="requirements">
+        <h2>Requirements</h2>
+        <ul>
+          <li><strong>Windows Server 2019 or later</strong>, or Windows 10 / 11 (64-bit).</li>
+          <li><strong>ASP.NET Core Runtime 8.0.x (Hosting Bundle)</strong> — install it first from <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank" rel="noopener">dotnet.microsoft.com</a>.</li>
+          <li>Administrator rights to run the installer.</li>
+          <li>An SSD for the data directory is strongly recommended. See <a href="#sizing">Sizing</a> for CPU, RAM and disk.</li>
+        </ul>
+      </section>
+
+      <section id="install">
+        <h2>Install</h2>
+        <ol class="steps-list">
+          <li><strong>Download</strong> the latest installer from the <a href="/updates.html#syslog-manager-latest">Updates page</a> and, optionally, verify its SHA-256:
+            <pre><code>certutil -hashfile <span data-rel="syslog.file">VSoftSolSyslogManagerSetup-1.1.1.msi</span> SHA256</code></pre>
+          </li>
+          <li><strong>Run the MSI as Administrator.</strong> It installs to <code>C:\Program Files\VSoftSol Syslog Manager</code>, creates the data directory at <code>C:\ProgramData\Vision Software Solutions\VSoftSol Syslog Manager</code> (restricted to the service account and Administrators), registers one Windows Service, and opens three firewall rules: UDP 514, TCP 514 and TCP 5443.</li>
+          <li><strong>Open the dashboard</strong> at <code>https://&lt;this-server&gt;:5443</code>. Your browser will warn about the self-signed certificate on first visit — that is expected; see <a href="#certificate">HTTPS certificate</a> to replace it.</li>
+        </ol>
+        <div class="callout">
+          <strong>One service, one console</strong>
+          Everything runs in a single Windows Service named <em>VSoftSol Syslog Manager</em>, under a dedicated virtual account (<code>NT SERVICE\VSoftSol Syslog Manager</code>) rather than LocalSystem. It starts automatically (delayed) after boot and restarts itself if it ever exits unexpectedly. Every setting is reachable from the web UI — there is no config file to edit for normal operation.
+        </div>
+      </section>
+
+      <section id="first-run">
+        <h2>First run</h2>
+        <p>The first visit opens a five-step wizard. It can’t be skipped or re-run once finished, so take a moment on each step:</p>
+        <ol>
+          <li><strong>Administrator password</strong> for the first account.</li>
+          <li><strong>Listener ports</strong> — syslog UDP, syslog TCP and HTTPS dashboard (defaults 514 / 514 / 5443).</li>
+          <li><strong>Data directory</strong> — shown for confirmation; the installer has already set it up with the correct permissions.</li>
+          <li><strong>Retention preset</strong> — Small, Medium or Large, with a disk-usage estimate.</li>
+          <li><strong>Vendor configuration bundle</strong> — optional.</li>
+        </ol>
+        <p>After the wizard, the <strong>Waiting for messages</strong> page shows copy-ready configuration commands for your devices, with this server’s address and port already filled in. The dashboard opens automatically the moment the first message arrives.</p>
+      </section>
+
+      <section id="devices">
+        <h2>Connect devices</h2>
+        <p>Any device that speaks <strong>RFC 3164 or RFC 5424</strong> syslog is supported for collection — point it at this server’s address on the UDP or TCP port you chose. Messages are never rejected for coming from an unrecognised vendor: they’re stored raw and remain fully searchable.</p>
+        <table>
+          <thead><tr><th>Tier</th><th>What you get</th><th>Coverage</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1 — Collection</strong></td><td>Received, stored, searchable, alertable</td><td>Every RFC 3164 / 5424 device</td></tr>
+            <tr><td><strong>2 — Parsing</strong></td><td>Content split into named fields for rules and dashboards</td><td>17 built-in vendor packs, plus your own via the Pattern Tester</td></tr>
+            <tr><td><strong>3 — Non-syslog intake</strong></td><td>Sources that can’t send syslog</td><td>SNMP traps (v1/v2c) and Windows Event Log</td></tr>
+          </tbody>
+        </table>
+        <h3>Vendors parsed out of the box</h3>
+        <p>Cisco IOS/IOS-XE · Cisco ASA · Fortinet FortiGate · Palo Alto PAN-OS · Juniper JunOS · MikroTik RouterOS · Ubiquiti UniFi · Linux (sshd, sudo, cron, kernel) · Check Point Gaia · Sophos XG/XGS · SonicWall SonicOS · pfSense · OPNsense · Aruba (AOS-Switch and AOS-CX) · Huawei VRP · VMware ESXi.</p>
+        <h3>Adding your own device</h3>
+        <p>Open <strong>Settings → Pattern tester</strong> with a real sample message, build a GROK or regex extractor, and save it. It applies to every new matching message — no code change, no new release — and its fields become searchable as <code>field.&lt;name&gt;</code>.</p>
+        <div class="callout warn">
+          <strong>Not supported in v1</strong>
+          API-only cloud log sources, NetFlow / sFlow / IPFIX, and endpoint agents. For servers and workstations, use their native syslog forwarding (for example rsyslog or NXLog) or the built-in Windows Event Log intake.
+        </div>
+      </section>
+
+      <section id="search">
+        <h2>Search basics</h2>
+        <ul>
+          <li><strong>Bare words</strong> search message text: <code>failed login</code></li>
+          <li><strong>Quoted phrase</strong> for an exact match: <code>"authentication failure for user root"</code></li>
+          <li><strong>Field filter</strong>: <code>host:web01</code>, with a trailing wildcard: <code>host:web0*</code></li>
+          <li><strong>Boolean logic</strong>: <code>severity:error AND (host:web01 OR host:web02)</code></li>
+          <li><strong>Ranges</strong>: <code>severity:&lt;=warning</code>, <code>received:&gt;-1h</code> (last hour), <code>event_id:&gt;10000</code></li>
+        </ul>
+        <p>Common fields: <code>message</code>, <code>raw</code>, <code>host</code>, <code>source_ip</code>, <code>app</code>, <code>severity</code>, <code>facility</code>, <code>vendor</code>, <code>protocol</code>, <code>parse_status</code>, <code>device</code>, <code>stream</code>, <code>received</code>, <code>event_time</code>. Leave the box empty to match everything. Any result set can be exported as CSV, JSON or raw text.</p>
+      </section>
+
+      <section id="ports">
+        <h2>Ports &amp; firewall</h2>
+        <table>
+          <thead><tr><th>Purpose</th><th>Default</th><th>How to change it</th></tr></thead>
+          <tbody>
+            <tr><td>Syslog UDP</td><td>514</td><td>Settings → Listeners → Apply (live, no restart, v1.1+)</td></tr>
+            <tr><td>Syslog TCP</td><td>514</td><td>Settings → Listeners → Apply (live, no restart, v1.1+)</td></tr>
+            <tr><td>HTTPS dashboard</td><td>5443</td><td>Edit <code>config\bootstrap-overrides.json</code> in the data directory, then restart the service</td></tr>
+          </tbody>
+        </table>
+        <p>A listener change binds the new port before closing the old one, so a mistyped or already-used port is refused and the previous port keeps running. To change the dashboard port:</p>
+        <pre><code>{
+  "Ingestion": { "UdpPort": 1514, "TcpPort": 1514 },
+  "Kestrel": { "Endpoints": { "Https": { "Url": "https://0.0.0.0:8443" } } }
+}</code></pre>
+      </section>
+
+      <section id="upgrade">
+        <h2>Upgrading</h2>
+        <p>Run the newer MSI as Administrator directly over the existing install — no need to uninstall first. The service is stopped and restarted automatically; expect a gap of a few seconds to low tens of seconds in collection, so schedule upgrades outside your busiest period.</p>
+        <div class="callout ok">
+          <strong>Preserved across upgrades</strong>
+          The database (events, streams, rules, alerts, dashboards, reports, users, audit log), the data directory and its permissions, your HTTPS certificate, and any listener-port overrides.
+        </div>
+        <p><strong>Automatic update checks</strong> (Settings → Updates) are off by default. When enabled, the server checks GitHub on your chosen interval (1–168 hours), downloads a new release and verifies its signature and hash. Nothing installs itself — you download the verified installer and run it yourself. A release that fails verification is never offered and is recorded in the audit log.</p>
+      </section>
+
+      <section id="backup">
+        <h2>Backup &amp; restore</h2>
+        <p>All product state lives in the data directory, so backing it up captures everything. Stop the service first for a guaranteed-consistent copy (typically well under a minute). Run in PowerShell as Administrator:</p>
+        <pre><code>Stop-Service "VSoftSol Syslog Manager"
+$stamp = Get-Date -Format "yyyyMMdd-HHmmss"
+$dest  = "D:\Backups\vsoftsol-$stamp"
+robocopy "C:\ProgramData\Vision Software Solutions\VSoftSol Syslog Manager" $dest /E /XD spill /R:2 /W:5
+Start-Service "VSoftSol Syslog Manager"</code></pre>
+        <p>To restore, reverse it:</p>
+        <pre><code>Stop-Service "VSoftSol Syslog Manager"
+Remove-Item "C:\ProgramData\Vision Software Solutions\VSoftSol Syslog Manager\syslog.db*" -Force
+robocopy "D:\Backups\vsoftsol-20260101-020000" "C:\ProgramData\Vision Software Solutions\VSoftSol Syslog Manager" /E /R:2 /W:5
+Start-Service "VSoftSol Syslog Manager"</code></pre>
+        <p>For a lighter-weight copy of your configuration only (rules, streams, devices, users, dashboards, reports, parser packs), use <strong>Settings → Config bundles → Export</strong>.</p>
+      </section>
+
+      <section id="certificate">
+        <h2>HTTPS certificate</h2>
+        <p>On first start the service generates a self-signed certificate so the dashboard works over HTTPS immediately. For anything beyond evaluation, replace it with one from your organisation’s CA:</p>
+        <ol>
+          <li>Export a certificate and private key for this server’s hostname as a <code>.pfx</code> file.</li>
+          <li>Stop the service.</li>
+          <li>Replace <code>&lt;data directory&gt;\certs\web-https.pfx</code> with your file, keeping the exact filename.</li>
+          <li>Start the service.</li>
+        </ol>
+        <p>The service never overwrites an existing certificate — it only generates one when the file is missing.</p>
+      </section>
+
+      <section id="sizing">
+        <h2>Sizing</h2>
+        <p>Planning figures assume 5 events per minute per device and 300 bytes per stored message. Once real traffic is flowing, Settings → Retention shows a measured estimate — trust that over this table.</p>
+        <table>
+          <thead><tr><th></th><th>Small</th><th>Medium</th><th>Large</th></tr></thead>
+          <tbody>
+            <tr><td>Devices</td><td>up to ~50</td><td>up to ~200</td><td>up to ~1,000</td></tr>
+            <tr><td>Assumed load</td><td>~4 events/sec</td><td>~17 events/sec</td><td>~83 events/sec</td></tr>
+            <tr><td>Retention (hot / warm / cold days)</td><td>30 / 60 / 180</td><td>30 / 90 / 365</td><td>14 / 90 / 730</td></tr>
+            <tr><td>RAM</td><td>4 GB</td><td>8 GB</td><td>16 GB</td></tr>
+            <tr><td>CPU</td><td>2 vCPU</td><td>2 vCPU</td><td>2–4 vCPU</td></tr>
+            <tr><td>Disk at steady state</td><td>≈ 11.5 GB</td><td>≈ 76 GB</td><td>≈ 606 GB</td></tr>
+          </tbody>
+        </table>
+        <p>Measured on a 2-vCPU VM, the full pipeline with all 17 vendor packs processes about 7,300 messages per second — far above typical sustained load. Bursts are absorbed by a disk-backed spill queue without losing messages.</p>
+      </section>
+
+      <section id="troubleshooting">
+        <h2>Troubleshooting</h2>
+        <h3>The service won’t start</h3>
+        <p>Check the Windows Event Log (Application log, source “VSoftSol Syslog Manager”). The usual causes are a missing or wrong-version ASP.NET Core Runtime, a configured port already in use, or data-directory permissions changed outside the installer (repair the installation from Programs and Features).</p>
+        <h3>The dashboard is unreachable but the service is running</h3>
+        <p>Confirm the firewall rule exists and that you’re browsing to the right port:</p>
+        <pre><code>Get-NetFirewallRule -DisplayName "*VSoftSol*"</code></pre>
+        <h3>No messages are arriving</h3>
+        <p>Check the device is sending to this server’s address and the configured port, that Windows Firewall allows the syslog port, and that the device’s own ACLs permit outbound traffic to this server.</p>
+        <h3>A message arrived but isn’t parsed</h3>
+        <p>It’s still stored and searchable, raw text intact, in the built-in <strong>Parse Failures</strong> stream. Add a pattern with the Pattern Tester (see <a href="#devices">Connect devices</a>).</p>
+      </section>
+
+      <p style="color:var(--text-3);font-size:14px;">Looking for release notes? See <a href="/updates.html">Updates</a>. Using vSoft-Network-Backup too? Read its <a href="/docs/network-backup.html">getting-started guide</a>.</p>
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="/">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 6 L20 32 L34 6" fill="none" stroke="url(#g1)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Vision Software Solutions</span>
+        </a>
+        <p class="support">Built and maintained by Vision Software Solutions. If these tools save you time, consider chipping in to support ongoing development.</p>
+        <a class="kofi" href="https://ko-fi.com/vsoft" target="_blank" rel="noopener">♥ Support on Ko-fi</a>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul>
+          <li><a href="/#syslog-manager">Syslog Manager</a></li>
+          <li><a href="/#network-backup">Network Backup</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="/updates.html">Updates &amp; release notes</a></li>
+          <li><a href="/updates.html#how-to-update">Upgrade guide</a></li>
+          <li><a href="/docs/">Documentation</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>GitHub</h4>
+        <ul>
+          <li><a href="https://github.com/saqibtechnn/vsoftsol-syslog-manager/releases" target="_blank" rel="noopener">Syslog Manager releases</a></li>
+          <li><a href="https://github.com/saqibtechnn/vSoft-Baclup-Updates/releases" target="_blank" rel="noopener">Network Backup releases</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span class="year">2026</span> Vision Software Solutions. All rights reserved.</span>
+      <a href="#main">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/app.js" defer></script>
+</body>
+</html>
