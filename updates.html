@@ -76,36 +76,52 @@
       <article class="release-card latest" id="syslog-manager-latest">
         <div class="release-top">
           <div>
-            <h2>VSoftSol Syslog Manager <span data-rel="syslog.version">v1.1.1</span> <span class="chip">Latest</span></h2>
-            <div class="release-meta">Released <span data-rel="syslog.date">September 23, 2026</span></div>
+            <h2>VSoftSol Syslog Manager <span data-rel="syslog.version">v1.1.2</span> <span class="chip">Latest</span></h2>
+            <div class="release-meta">Released <span data-rel="syslog.date">October 7, 2026</span></div>
           </div>
-          <a class="btn btn-syslog" data-rel-href="syslog.url" href="https://github.com/saqibtechnn/vsoftsol-syslog-manager/releases/latest">
-            <svg class="i" viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
-            Download installer (<span data-rel="syslog.size">11.8 MB</span>)
-          </a>
         </div>
 
+        <h3 id="new-install">New installation <span class="chip">first time on this server</span></h3>
+        <p class="note">Installs the ASP.NET Core 8 Hosting Bundle for you if it is missing — it is built into this file, so it works on a server with no internet access — and then installs the product.</p>
+        <p>
+          <a class="btn btn-syslog" data-rel-href="syslogInstall.url" href="https://github.com/saqibtechnn/vsoftsol-syslog-manager/releases/latest">
+            <svg class="i" viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
+            Download new-installation file (<span data-rel="syslogInstall.size">118.2 MB</span>)
+          </a>
+        </p>
         <table class="meta-table">
-          <tr><th>File</th><td><code data-rel="syslog.file">VSoftSolSyslogManagerSetup-1.1.1.msi</code></td></tr>
-          <tr><th>SHA-256</th><td><code data-rel="syslog.sha">85997bd8eacb38d5914ee56c437e23ff49cd3deb9bfd90354571bfa16eec5c9a</code> <button class="copy-btn" type="button" data-copy="syslog.sha">Copy</button></td></tr>
-          <tr><th>Requirements</th><td>Windows Server 2019 or later, or Windows 10 / 11 (64-bit). The ASP.NET Core 8 Runtime (Hosting Bundle) must be installed first.</td></tr>
-          <tr><th>Install as</th><td>Administrator (right-click the MSI &rarr; Run as administrator, or run it from an elevated prompt).</td></tr>
+          <tr><th>File</th><td><code data-rel="syslogInstall.file">VSoftSolSyslogManagerInstall-1.1.2.exe</code></td></tr>
+          <tr><th>SHA-256</th><td><code data-rel="syslogInstall.sha">f52837cd4bf5d0f10b44a053a0810152a73349c45a36829d8ae23d37d78ae123</code> <button class="copy-btn" type="button" data-copy="syslogInstall.sha">Copy</button></td></tr>
+          <tr><th>Requirements</th><td>Windows Server 2019 or later, or Windows 10 / 11 (64-bit).</td></tr>
+          <tr><th>Install as</th><td>Double-click it; Windows asks for administrator approval.</td></tr>
         </table>
 
-        <div id="syslog-notes" data-curated-version="v1.1.1">
+        <h3 id="update-file">Update <span class="chip">already installed</span></h3>
+        <p class="note">The small file: installs over your existing install and keeps your data. Needs the Hosting Bundle already present, which any existing install has.</p>
+        <p>
+          <a class="btn btn-ghost" data-rel-href="syslog.url" href="https://github.com/saqibtechnn/vsoftsol-syslog-manager/releases/latest">
+            <svg class="i" viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
+            Download update file (<span data-rel="syslog.size">11.8 MB</span>)
+          </a>
+        </p>
+        <table class="meta-table">
+          <tr><th>File</th><td><code data-rel="syslog.file">VSoftSolSyslogManagerUpdate-1.1.2.msi</code></td></tr>
+          <tr><th>SHA-256</th><td><code data-rel="syslog.sha">3a0d4a7429d0b09194003ce7cc9bee20d397841271d9e93bff5eb19888e5bb45</code> <button class="copy-btn" type="button" data-copy="syslog.sha">Copy</button></td></tr>
+          <tr><th>Install as</th><td>Administrator (right-click the file &rarr; Run as administrator, or run it from an elevated prompt).</td></tr>
+        </table>
+        <p class="note"><strong>Heads-up:</strong> these installers are not code-signed yet, so Windows may show “Unknown publisher” or a SmartScreen warning. Compare the SHA-256 above with your download (<code>certutil -hashfile &lt;file&gt; SHA256</code>) before running.</p>
+
+        <div id="syslog-notes" data-curated-version="v1.1.2">
           <h3>What’s new</h3>
           <ul>
-            <li><strong>Update checks (opt-in, off by default).</strong> Settings &rarr; Updates can periodically check for a newer release, download it, and verify its cryptographic signature and hash. Nothing installs itself — you download the verified installer and run it, exactly as described below. A release that fails verification is never offered and is recorded in the audit log.</li>
-            <li><strong>Fixed: exporting a config bundle.</strong> Settings &rarr; Config bundles &rarr; Export returned an error page. It now downloads the signed bundle.</li>
-            <li><strong>Fixed: “Run now” report downloads and the first-run “Waiting for messages” page.</strong> Both hit the same underlying error; on-demand PDF/CSV reports download again, and the first-run page auto-advances to the dashboard once your first message arrives.</li>
-            <li><strong>Fixed: the installer’s .NET Runtime check.</strong> Earlier installers reported the ASP.NET Core Hosting Bundle as missing on every machine, even when it was installed. This build passes the check correctly.</li>
-            <li>The product’s internal version number now matches its release version.</li>
+            <li><strong>Two separate downloads: one to update, one for a new installation.</strong> The new-installation file brings its own .NET prerequisite; the update file stays small. Either can do the other’s job where the prerequisite is already present. The application itself is unchanged from v1.1.1.</li>
+            <li>The product version is now defined in one place, so the installer and the bundle can no longer disagree.</li>
           </ul>
         </div>
 
         <h3 id="how-to-update">How to update an existing install</h3>
         <ol>
-          <li>Download the installer above and, if you like, compare its SHA-256 with the value shown (<code>certutil -hashfile <span data-rel="syslog.file">VSoftSolSyslogManagerSetup-1.1.1.msi</span> SHA256</code>).</li>
+          <li>Download the update file above and, if you like, compare its SHA-256 with the value shown (<code>certutil -hashfile <span data-rel="syslog.file">VSoftSolSyslogManagerUpdate-1.1.2.msi</span> SHA256</code>).</li>
           <li>Run it as Administrator directly over your existing install — there is no need to uninstall first.</li>
           <li>The service is stopped and restarted automatically. Expect a brief gap in collection (seconds to low tens of seconds); schedule the upgrade outside your busiest period if that matters, since a long gap can drop UDP datagrams.</li>
         </ol>
@@ -116,7 +132,15 @@
       <h2 class="section-title" style="text-align:left;margin:48px 0 20px;">Syslog Manager release history</h2>
       <div class="timeline" id="history-syslog">
         <!-- Fallback content; replaced with live GitHub data when available -->
-        <div class="tl-item first"><details><summary><b>v1.1.1</b><span class="chip">Latest</span><span class="date">September 23, 2026</span><span class="expand">See above</span></summary><div class="md"><p>See the release notes above.</p></div></details></div>
+        <div class="tl-item first"><details><summary><b>v1.1.2</b><span class="chip">Latest</span><span class="date">October 7, 2026</span><span class="expand">See above</span></summary><div class="md"><p>See the release notes above.</p></div></details></div>
+        <div class="tl-item"><details><summary><b>v1.1.1</b><span class="date">September 23, 2026</span><span class="expand">Show notes</span></summary>
+          <div class="md"><ul>
+            <li><strong>Fixed: exporting a config bundle.</strong> Settings &rarr; Config bundles &rarr; Export returned an error page.</li>
+            <li><strong>Fixed: “Run now” report downloads and the first-run “Waiting for messages” page,</strong> which hit the same underlying error.</li>
+            <li><strong>Fixed: the installer’s .NET Runtime check,</strong> which reported the Hosting Bundle as missing on every machine even when it was installed.</li>
+            <li>Groundwork for opt-in, signature-verified update checks (Settings &rarr; Updates). Automatic checking is not active in this release — update by running the Update file.</li>
+            <li>The product’s internal version number now matches its release version.</li>
+          </ul></div></details></div>
         <div class="tl-item"><details><summary><b>v1.1.0</b><span class="date">September 15, 2026</span><span class="expand">Show notes</span></summary>
           <div class="md"><ul>
             <li><strong>TOTP MFA enforced at sign-in.</strong> Enabling MFA on an account now actually changes what signing in requires — a code or unused recovery code, with its own rate limit.</li>
@@ -131,7 +155,7 @@
             <li>17 vendor parser packs and a Pattern Tester for your own.</li>
             <li>Search language, rules and alerts, dashboards, and scheduled PDF/CSV reports including compliance templates.</li>
             <li>Hot/warm/cold retention with verified archives, role-based access, TOTP MFA enrollment, audit log, and signed configuration bundles.</li>
-            <li>Signed MSI installer with a five-step first-run wizard.</li>
+            <li>MSI installer with a five-step first-run wizard.</li>
           </ul></div></details></div>
       </div>
     </div>
