@@ -543,3 +543,5 @@ a.kofi:hover { background: #c93532; }
 .notfound .code { font-family: var(--mono); font-size: 14px; color: var(--text-3); letter-spacing: .1em; }
 .notfound h1 { font-size: clamp(30px, 5vw, 48px); letter-spacing: -.03em; margin: 12px 0; }
 .notfound p { color: var(--text-2); margin: 0 0 28px; }
+.footer-email { margin: 14px 0 0; }
+.footer-email a { color: var(--text-2); font-weight: 600; }
