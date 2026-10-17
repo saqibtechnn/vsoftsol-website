@@ -171,12 +171,12 @@
 
       <section id="upgrade">
         <h2>Upgrading</h2>
-        <p>Run the newer MSI as Administrator directly over the existing install — no need to uninstall first. The service is stopped and restarted automatically; expect a gap of a few seconds to low tens of seconds in collection, so schedule upgrades outside your busiest period.</p>
+        <p>Download the small <strong>Update</strong> file (<span data-rel="syslog.file">VSoftSolSyslogManagerUpdate-1.1.2.msi</span>) from the <a href="/updates.html#update-file">Updates page</a> and run it as Administrator directly over the existing install — no need to uninstall first. The service is stopped and restarted automatically; expect a gap of a few seconds to low tens of seconds in collection, so schedule upgrades outside your busiest period.</p>
         <div class="callout ok">
           <strong>Preserved across upgrades</strong>
           The database (events, streams, rules, alerts, dashboards, reports, users, audit log), the data directory and its permissions, your HTTPS certificate, and any listener-port overrides.
         </div>
-        <p><strong>Automatic update checks</strong> (Settings → Updates) are off by default. When enabled, the server checks GitHub on your chosen interval (1–168 hours), downloads a new release and verifies its signature and hash. Nothing installs itself — you download the verified installer and run it yourself. A release that fails verification is never offered and is recorded in the audit log.</p>
+        <p><strong>Checking for new versions:</strong> nothing updates itself. New releases are listed on the <a href="/updates.html">Updates page</a> and on GitHub. The installers are not code-signed yet, so Windows may show an “Unknown publisher” prompt — compare the file’s SHA-256 with the value published on the Updates page before running it.</p>
       </section>
 
       <section id="backup">
