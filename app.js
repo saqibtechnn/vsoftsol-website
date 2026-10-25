@@ -232,7 +232,7 @@
     // "syslog" is the Update file (the MSI); "syslogInstall" is the new-installation bundle (.exe).
     syslog: { repo: 'saqibtechnn/vsoftsol-syslog-manager', asset: /\.msi$/i },
     syslogInstall: { repo: 'saqibtechnn/vsoftsol-syslog-manager', asset: /^VSoftSolSyslogManagerInstall-.*\.exe$/i },
-    backup: { repo: 'saqibtechnn/vSoft-Baclup-Updates', asset: /^CiscoConfigBackup-Beta-Setup\.exe$/i }
+    backup: { repo: 'saqibtechnn/vSoft-Baclup-Updates', asset: /^CiscoConfigBackup-Setup\.exe$/i }
   };
   var CACHE_MS = 10 * 60 * 1000;
 
