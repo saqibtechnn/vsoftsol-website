@@ -94,7 +94,7 @@
         <h2>Install</h2>
         <ol class="steps-list">
           <li><strong>Download</strong> the <em>new-installation</em> file from the <a href="/updates.html#new-install">Updates page</a> (for an existing install, use the <a href="/updates.html#update-file">update file</a> instead) and, optionally, verify its SHA-256:
-            <pre><code>certutil -hashfile <span data-rel="syslogInstall.file">VSoftSolSyslogManagerInstall-1.1.2.exe</span> SHA256</code></pre>
+            <pre><code>certutil -hashfile <span data-rel="syslogInstall.file">VSoftSolSyslogManagerInstall-1.1.3.exe</span> SHA256</code></pre>
             These installers are not code-signed yet, so Windows may show an “Unknown publisher” warning — checking the hash is how you confirm the file is genuine.
           </li>
           <li><strong>Run it and approve the administrator prompt.</strong> It installs to <code>C:\Program Files\VSoftSol Syslog Manager</code>, creates the data directory at <code>C:\ProgramData\Vision Software Solutions\VSoftSol Syslog Manager</code> (restricted to the service account and Administrators), registers one Windows Service, and opens three firewall rules: UDP 514, TCP 514 and TCP 5443.</li>
@@ -171,7 +171,7 @@
 
       <section id="upgrade">
         <h2>Upgrading</h2>
-        <p>Download the small <strong>Update</strong> file (<span data-rel="syslog.file">VSoftSolSyslogManagerUpdate-1.1.2.msi</span>) from the <a href="/updates.html#update-file">Updates page</a> and run it as Administrator directly over the existing install — no need to uninstall first. The service is stopped and restarted automatically; expect a gap of a few seconds to low tens of seconds in collection, so schedule upgrades outside your busiest period.</p>
+        <p>Download the small <strong>Update</strong> file (<span data-rel="syslog.file">VSoftSolSyslogManagerUpdate-1.1.3.msi</span>) from the <a href="/updates.html#update-file">Updates page</a> and run it as Administrator directly over the existing install — no need to uninstall first. The service is stopped and restarted automatically; expect a gap of a few seconds to low tens of seconds in collection, so schedule upgrades outside your busiest period.</p>
         <div class="callout ok">
           <strong>Preserved across upgrades</strong>
           The database (events, streams, rules, alerts, dashboards, reports, users, audit log), the data directory and its permissions, your HTTPS certificate, and any listener-port overrides.
